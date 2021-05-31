@@ -1,6 +1,6 @@
 package entities;
 
-public class Worker implements Comparable<Worker> {
+public class Worker {
 
 	private String name;
 	private int cpf;
@@ -27,6 +27,7 @@ public class Worker implements Comparable<Worker> {
 		this.name = name;
 	}
 
+//
 	public int getCpf() {
 		return cpf;
 	}
@@ -42,34 +43,40 @@ public class Worker implements Comparable<Worker> {
 	public void setDepartament(Departament departament) {
 		this.departament = departament;
 	}
-	
-	public Worker compareAge(Worker worker) {
-		if(this.compareTo(worker) == 1) {
-			 return this;
-		} else if (this.compareTo(worker) == 0) {
-			return worker;
+
+	// Um metodo faria comparação de idades
+	public boolean compareAge(Worker worker) {
+		if (worker == null) {
+			return false;
 		}
-		 return worker;
+
+		return this.age == worker.age;
 	}
 
-	public int compareTo(Worker o) {
+	// Um metodo ignorando as mesmas idades. Verifica o que tem maior idade.
+
+	public Worker compareTo(Worker o) {
+		if (o == null) {
+			return this;
+		}
 		if (this.age > o.age) {
-			return 1;
+			return this;
 		}
-		return 0;
+		return o;
 	}
 
-	public boolean contem(Worker worker) {
+	public boolean sameName(Worker worker) {
 		String name = this.name;
 		if (!name.equals(worker.name)) {
-			return true;
+			return false;
 		}
 
-		if (this.departament == worker.departament) {
-			return true;
-		}
+		String nameW = worker.name;
+		Departament dep = worker.departament;
 
-		return false;
+		boolean nomeEquals = this.name.equals(nameW);
+		boolean departamentosEquals = dep == null ? this.departament == null : dep.compareName(this.departament);
+		return nomeEquals && departamentosEquals;
 	}
 
 	@Override

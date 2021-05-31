@@ -26,9 +26,25 @@ public class Departament {
 	public int getRamal() {
 		return ramal;
 	}
-
+	
 	public void setRamal(int ramal) {
 		this.ramal = ramal;
 	}
+	
+	public boolean compareName(Departament departament) {
+		if(departament == null) {
+			return false;
+		}
+		boolean nameEquals = departament.nameDepartament.equals(this.nameDepartament);
+		boolean ramalEquals = departament.ramal == this.ramal;
+		return nameEquals && ramalEquals;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("nome: %S , ramal: %d", nameDepartament, ramal);
+	}
+	
+	
 
 }
